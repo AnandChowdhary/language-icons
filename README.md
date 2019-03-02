@@ -40,7 +40,7 @@ import English from "./node_modules/language-icons/icons/en.svg"
 
 ## 🎨 Icons
 
-See the list of icons: https://unpkg.com/language-icons/icons/
+See the list of icons: https://unpkg.com/language-icons@0.2.0/icons/
 
 ![English](https://unpkg.com/language-icons/icons/en.svg)
 ![Hindi](https://unpkg.com/language-icons/icons/hi.svg)
