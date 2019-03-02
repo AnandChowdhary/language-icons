@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc && node dist/index.js",
-    "watch": "onchange 'index.ts' -- yarn build"
+    "watch": "onchange 'colors.json' -- yarn build"
   },
   "devDependencies": {
     "@types/node": "^11.10.4",
