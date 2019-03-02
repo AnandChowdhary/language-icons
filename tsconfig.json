@@ -5,7 +5,8 @@
     "outDir": "dist",
     "typeRoots": ["node_modules/@types/"],
     "experimentalDecorators": true,
-    "declaration": true
+    "declaration": true,
+    "resolveJsonModule": true
   },
-  "exclude": ["node_modules", "icons"]
+  "files": ["index.ts"]
 }
