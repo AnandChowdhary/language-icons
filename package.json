@@ -1,0 +1,16 @@
+{
+  "name": "language-icons",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/AnandChowdhary/language-icons",
+  "author": "Anand Chowdhary <mail@anandchowdhary.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc && node dist/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^11.10.4",
+    "tsc": "^1.20150623.0",
+    "typescript": "^3.3.3333"
+  }
+}
