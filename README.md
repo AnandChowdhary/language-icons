@@ -1,5 +1,12 @@
 # 🌐 Language icons
 
+[![NPM](https://img.shields.io/npm/v/language-icons.svg)](https://www.npmjs.com/package/language-icons)
+![Icon size](https://img.shields.io/github/size/AnandChowdhary/language-icons/one-color.svg.svg)
+[![Build](https://img.shields.io/travis/AnandChowdhary/language-icons.svg)](https://travis-ci.org/AnandChowdhary/language-icons)
+![Type definitions](https://img.shields.io/npm/types/language-icons.svg?color=brightgreen)
+[![GitHub](https://img.shields.io/github/license/anandchowdhary/language-icons.svg)](https://github.com/AnandChowdhary/language-icons/blob/master/LICENSE)
+![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/AnandChowdhary/language-icons.svg)
+
 [Flags are not languages](http://www.flagsarenotlanguages.com/blog/), so we shouldn't use country flags as language icons.
 
 You can use these icons instead.
