@@ -34,6 +34,10 @@ They are in the `./icons` folder, you can use an SVG loader to import them:
 import English from "./node_modules/language-icons/icons/en.svg"
 ```
 
+## ⭐ Why
+
+![Example of flags versus language icons](https://raw.githubusercontent.com/AnandChowdhary/language-icons/master/example.png)
+
 ## 🎨 Icons
 
 See the list of icons: https://unpkg.com/language-icons/icons/
