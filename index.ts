@@ -31,6 +31,11 @@ async function main() {
     read("three-colors.svg"),
   ]);
 
+  const iconDir = join(__dirname, "icons");
+  if (!fs.existsSync(iconDir)) {
+    fs.mkdirSync(iconDir);
+  }
+
   return Promise.all(
     Object.keys(colors).map((code) =>
       writeIcon(
