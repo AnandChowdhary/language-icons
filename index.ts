@@ -50,8 +50,25 @@ function computeLeftMargin(code: string): number {
  * @param fileName A file name (and path) relative to the directory containing this script file.
  * @returns An asynchronous promise returning the file content as string.
  */
-function read(fileName: string): Promise<string> {
+function readFile(fileName: string): Promise<string> {
   return fs.promises.readFile(join(rootDir, fileName), 'utf8');
+}
+
+
+/**
+ * Writes the content of a file.
+ * @param directory Path of a directory in which the file should be written.
+ *                  If this directory does not exist, it is created.
+ * @param fileName Name of the written file within the given `directory`.
+ * @param data File content as string.
+ * @returns An asynchronous promise waiting for the file to be written.
+ */
+function writeFile(directory: string, fileName: string, data: string): Promise<void> {
+  // Create language icon file directory if it does not exist
+  if (!fs.existsSync(directory)) {
+    fs.mkdirSync(directory);
+  }
+  return fs.promises.writeFile(join(directory, fileName), data, 'utf8');
 }
 
 
@@ -62,12 +79,7 @@ function read(fileName: string): Promise<string> {
  * @returns An asynchronous promise waiting for the file to be written.
  */
 function writeIcon(code: string, data: string): Promise<void> {
-  // Create language icon file directory if it does not exist
-  if (!fs.existsSync(iconsDir)) {
-    fs.mkdirSync(iconsDir);
-  }
-
-  return fs.promises.writeFile(join(iconsDir, `${code}.svg`), data);
+  return writeFile(iconsDir, `${code}.svg`, data);
 }
 
 
@@ -76,9 +88,10 @@ function writeIcon(code: string, data: string): Promise<void> {
  * @param code Language code.
  * @param templates Array of all template SVG file contents
  *                  (`[one-color.svg, two-colors.svg, three-colors.svg]`).
- * @returns An asynchronous promise waiting for the file to be written.
+ * @returns An asynchronous promise waiting for the file to be written
+ *          and returning the SVG file content as string.
  */
-async function generateIcon(code: string, templates: string[]): Promise<void> {
+async function generateIcon(code: string, templates: string[]): Promise<string> {
   // Choose a template file based on the number of colors
   const languageColors: string[] = colors[code];
   const templateData: string = templates[languageColors.length ? languageColors.length - 1 : 1];
@@ -109,6 +122,8 @@ async function generateIcon(code: string, templates: string[]): Promise<void> {
 
   //console.log(`- ${code}.svg generated${addFontStroke ? ' (with text stroke for better contrast)' : ''}`);
   console.log(`- ${code}.svg generated`);
+
+  return data.trim();
 }
 
 
@@ -122,16 +137,26 @@ async function generateAllIcons(): Promise<void> {
 
     // Read template files
     const templates: string[] = await Promise.all([
-      read('one-color.svg'),
-      read('two-colors.svg'),
-      read('three-colors.svg'),
+      readFile('one-color.svg'),
+      readFile('two-colors.svg'),
+      readFile('three-colors.svg'),
     ]);
 
     // Generate all language icons
+    const svgData: { [code: string]: string } = {};
     await Promise.all(
-      Object.keys(colors).map((code: string) => generateIcon(code, templates)),
+      Object.keys(colors).map(async (code: string) => {
+        svgData[code] = await generateIcon(code, templates);
+      }),
     );
     console.log('All language icons are generated!');
+    console.log();
+
+    const tsFileContent = 'export const languageIconsSvg: { [code: string]: string } = ' +
+      JSON.stringify(svgData, undefined, 2) + ';';
+    await writeFile(iconsDir, 'language-icons-svg.ts', tsFileContent);
+    console.log('TypeScript file containing the SVG code of all language icons was generated!');
+    console.log();
 
   } catch (error) {
     console.error('An error occurred while generating language icons: ' + error);
