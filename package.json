@@ -1,18 +1,19 @@
 {
   "name": "language-icons",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "repository": "https://github.com/AnandChowdhary/language-icons",
   "author": "Anand Chowdhary <mail@anandchowdhary.com>",
   "license": "MIT",
-  "files": ["icons"],
+  "files": [
+    "icons"
+  ],
   "scripts": {
     "build": "tsc && node dist/index.js",
     "watch": "onchange 'colors.json' -- yarn build"
   },
   "devDependencies": {
-    "@types/node": "^11.10.4",
-    "onchange": "^5.2.0",
-    "tsc": "^1.20150623.0",
-    "typescript": "^3.3.3333"
+    "@types/node": "^22.13.13",
+    "onchange": "^7.1.0",
+    "typescript": "^5.8.2"
   }
 }

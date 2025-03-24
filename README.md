@@ -1,5 +1,7 @@
 # 🌐 Language icons
 
+> Forked from [AnandChowdhary/language-icons](https://github.com/AnandChowdhary/language-icons)
+
 [![NPM](https://img.shields.io/npm/v/language-icons.svg)](https://www.npmjs.com/package/language-icons)
 ![Icon size](https://img.shields.io/github/size/AnandChowdhary/language-icons/one-color.svg.svg)
 [![Build](https://img.shields.io/travis/AnandChowdhary/language-icons.svg)](https://travis-ci.org/AnandChowdhary/language-icons)
@@ -58,9 +60,9 @@ See the list of icons: https://unpkg.com/language-icons@0.2.0/icons/
 ![Spanish](https://unpkg.com/language-icons/icons/es.svg)
 ![Dutch](https://unpkg.com/language-icons/icons/nl.svg)
 ![Urdu](https://unpkg.com/language-icons/icons/ur.svg)
-![](https://unpkg.com/language-icons/icons/tw.svg)
-![](https://unpkg.com/language-icons/icons/sl.svg)
-![](https://unpkg.com/language-icons/icons/jv.svg)
+![Twi](https://unpkg.com/language-icons/icons/tw.svg)
+![Slovenian](https://unpkg.com/language-icons/icons/sl.svg)
+![Javanese](https://unpkg.com/language-icons/icons/jv.svg)
 
 ## ⚒️ Building
 
