@@ -31,15 +31,11 @@ In HTML, for example:
 <img alt="English" src="https://unpkg.com/language-icons/icons/en.svg">
 ```
 
-Result: <img alt="English" src="https://unpkg.com/language-icons/icons/en.svg" style="width: 2em; margin-bottom: -0.7em;">
-
 With the CSS style `style="border-radius: 50%"` the icon can be converted to a circle:
 
 ```html
 <img alt="English" src="https://unpkg.com/language-icons/icons/en.svg" style="border-radius: 50%">
 ```
-
-Result: <img alt="English" src="https://unpkg.com/language-icons/icons/en.svg" style="border-radius: 50%; width: 2em; margin-bottom: -0.7em;">
 
 Icons are also available on NPM:
 
