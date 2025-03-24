@@ -78,7 +78,7 @@ function writeIcon(code: string, data: string): Promise<void> {
  *                  (`[one-color.svg, two-colors.svg, three-colors.svg]`).
  * @returns An asynchronous promise waiting for the file to be written.
  */
-function generateIcon(code: string, templates: string[]): Promise<void> {
+async function generateIcon(code: string, templates: string[]): Promise<void> {
   // Choose a template file based on the number of colors
   const templateData: string = templates[colors[code].length ? colors[code].length - 1 : 1];
   // Replace language code text, margin and colors in the template file
@@ -89,26 +89,38 @@ function generateIcon(code: string, templates: string[]): Promise<void> {
     .replace('COLOR_2', colors[code][1])
     .replace('COLOR_3', colors[code][2]);
   // Write icon file
-  return writeIcon(code, data);
+  await writeIcon(code, data);
+
+  console.log(`- ${code}.svg generated`);
 }
 
 
-async function main(): Promise<Awaited<void>[]> {
-  console.log(`Generating ${Object.keys(colors).length} language icons...`);
+/**
+ * Generates all language icons.
+ * @returns An asynchronous promise waiting for all files to be written.
+ */
+async function main(): Promise<void> {
+  try {
+    console.log(`Generating ${Object.keys(colors).length} language icons...`);
 
-  // Read template files
-  const templates: string[] = await Promise.all([
-    read('one-color.svg'),
-    read('two-colors.svg'),
-    read('three-colors.svg'),
-  ]);
+    // Read template files
+    const templates: string[] = await Promise.all([
+      read('one-color.svg'),
+      read('two-colors.svg'),
+      read('three-colors.svg'),
+    ]);
 
-  // Generate all language icons
-  return Promise.all(
-    Object.keys(colors).map((code: string) => generateIcon(code, templates)),
-  );
+    // Generate all language icons
+    await Promise.all(
+      Object.keys(colors).map((code: string) => generateIcon(code, templates)),
+    );
+    console.log('All language icons are generated!');
+
+  } catch (error) {
+    console.error('An error occurred while generating language icons: ' + error);
+  }
 }
 
-main()
-  .then(() => console.log('Language icons are generated!'))
-  .catch((error) => console.log('Error: ' + error));
+
+// Run program
+main().then();
