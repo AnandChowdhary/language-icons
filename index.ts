@@ -101,7 +101,7 @@ async function generateIcon(code: string, templates: string[]): Promise<void> {
     .replace('COLOR_2', languageColors[1])
     .replace('COLOR_3', languageColors[2]);
   if (addFontStroke) {
-    data = data.replace('<text ', '<text style="stroke:#000000;stroke-width:1;" ');
+    data = data.replace('<text ', '<text stroke="#000000" stroke-width="1" ');
   }
 
   // Write icon file

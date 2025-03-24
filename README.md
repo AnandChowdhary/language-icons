@@ -62,7 +62,7 @@ See the list of icons: https://unpkg.com/language-icons@0.2.0/icons/
 ![Urdu](https://unpkg.com/language-icons/icons/ur.svg)
 ![Twi](https://unpkg.com/language-icons/icons/tw.svg)
 ![Slovenian](https://unpkg.com/language-icons/icons/sl.svg)
-![Javanese](https://unpkg.com/language-icons/icons/jv.svg)
+![Danish](https://unpkg.com/language-icons/icons/da.svg)
 
 ## ⚒️ Building
 
