@@ -80,17 +80,34 @@ function writeIcon(code: string, data: string): Promise<void> {
  */
 async function generateIcon(code: string, templates: string[]): Promise<void> {
   // Choose a template file based on the number of colors
-  const templateData: string = templates[colors[code].length ? colors[code].length - 1 : 1];
+  const languageColors: string[] = colors[code];
+  const templateData: string = templates[languageColors.length ? languageColors.length - 1 : 1];
+
+  // Check color contrast between the language colors and the text color (white).
+  // Add black stroke to text, if language icon contains white color.
+  let addFontStroke: boolean = false;
+  for (const color of languageColors) {
+    if (color.toLowerCase() == '#ffffff') {
+      addFontStroke = true;
+      break;
+    }
+  }
+
   // Replace language code text, margin and colors in the template file
-  const data: string = templates[colors[code].length ? colors[code].length - 1 : 1]
+  let data: string = templateData
     .replace('LANGUAGE_CODE', code.toUpperCase())
     .replace(`x="20"`, `x="${computeLeftMargin(code)}"`)
-    .replace('COLOR_1', colors[code].length ? colors[code][0] : defaultColor)
-    .replace('COLOR_2', colors[code][1])
-    .replace('COLOR_3', colors[code][2]);
+    .replace('COLOR_1', languageColors.length ? languageColors[0] : defaultColor)
+    .replace('COLOR_2', languageColors[1])
+    .replace('COLOR_3', languageColors[2]);
+  if (addFontStroke) {
+    data = data.replace('<text ', '<text style="stroke:#000000;stroke-width:1;" ');
+  }
+
   // Write icon file
   await writeIcon(code, data);
 
+  //console.log(`- ${code}.svg generated${addFontStroke ? ' (with text stroke for better contrast)' : ''}`);
   console.log(`- ${code}.svg generated`);
 }
 
@@ -99,7 +116,7 @@ async function generateIcon(code: string, templates: string[]): Promise<void> {
  * Generates all language icons.
  * @returns An asynchronous promise waiting for all files to be written.
  */
-async function main(): Promise<void> {
+async function generateAllIcons(): Promise<void> {
   try {
     console.log(`Generating ${Object.keys(colors).length} language icons...`);
 
@@ -123,4 +140,4 @@ async function main(): Promise<void> {
 
 
 // Run program
-main().then();
+generateAllIcons().then();
