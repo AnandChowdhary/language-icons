@@ -1,11 +1,12 @@
 # 🌐 Language icons
 
+> Forked from [AnandChowdhary/language-icons](https://github.com/AnandChowdhary/language-icons)
+
 [![NPM](https://img.shields.io/npm/v/language-icons.svg)](https://www.npmjs.com/package/language-icons)
-![Icon size](https://img.shields.io/github/size/AnandChowdhary/language-icons/one-color.svg.svg)
-[![Build](https://img.shields.io/travis/AnandChowdhary/language-icons.svg)](https://travis-ci.org/AnandChowdhary/language-icons)
+![Icon size](https://img.shields.io/github/size/heinerwalter/language-icons/two-colors.svg.svg)
+[![Build](https://github.com/heinerwalter/language-icons/actions/workflows/build.yml/badge.svg)](https://github.com/heinerwalter/language-icons/actions/workflows/build.yml)
 ![Type definitions](https://img.shields.io/npm/types/language-icons.svg?color=brightgreen)
-[![GitHub](https://img.shields.io/github/license/anandchowdhary/language-icons.svg)](https://github.com/AnandChowdhary/language-icons/blob/master/LICENSE)
-![Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/AnandChowdhary/language-icons.svg)
+[![GitHub](https://img.shields.io/github/license/heinerwalter/language-icons.svg)](https://github.com/heinerwalter/language-icons/blob/master/LICENSE)
 
 [Flags are not languages](http://www.flagsarenotlanguages.com/blog/), so we shouldn't use country flags as language icons.
 
@@ -29,6 +30,12 @@ In HTML, for example:
 <img alt="English" src="https://unpkg.com/language-icons/icons/en.svg">
 ```
 
+With the CSS style `style="border-radius: 50%"` the icon can be converted to a circle:
+
+```html
+<img alt="English" src="https://unpkg.com/language-icons/icons/en.svg" style="border-radius: 50%">
+```
+
 Icons are also available on NPM:
 
 ```bash
@@ -47,7 +54,7 @@ import English from "./node_modules/language-icons/icons/en.svg"
 
 ## 🎨 Icons
 
-See the list of icons: https://unpkg.com/language-icons@0.2.0/icons/
+See the list of icons: https://unpkg.com/language-icons/icons/
 
 ![English](https://unpkg.com/language-icons/icons/en.svg)
 ![Hindi](https://unpkg.com/language-icons/icons/hi.svg)
@@ -58,9 +65,9 @@ See the list of icons: https://unpkg.com/language-icons@0.2.0/icons/
 ![Spanish](https://unpkg.com/language-icons/icons/es.svg)
 ![Dutch](https://unpkg.com/language-icons/icons/nl.svg)
 ![Urdu](https://unpkg.com/language-icons/icons/ur.svg)
-![](https://unpkg.com/language-icons/icons/tw.svg)
-![](https://unpkg.com/language-icons/icons/sl.svg)
-![](https://unpkg.com/language-icons/icons/jv.svg)
+![Twi](https://unpkg.com/language-icons/icons/tw.svg)
+![Slovenian](https://unpkg.com/language-icons/icons/sl.svg)
+![Danish](https://unpkg.com/language-icons/icons/da.svg)
 
 ## ⚒️ Building
 

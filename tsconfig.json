@@ -3,10 +3,14 @@
     "target": "es5",
     "module": "commonjs",
     "outDir": "dist",
-    "typeRoots": ["node_modules/@types/"],
+    "typeRoots": [
+      "node_modules/@types/"
+    ],
     "experimentalDecorators": true,
     "declaration": true,
     "resolveJsonModule": true
   },
-  "files": ["index.ts"]
+  "files": [
+    "index.ts"
+  ]
 }

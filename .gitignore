@@ -60,6 +60,9 @@ typings/
 # next.js build output
 .next
 
+# WebStorm configuration files
+.idea/
+
 # Built files
 icons/
 dist/
