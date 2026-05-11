@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import { join } from 'path';
 
-import { widths } from './widths';
 import * as colors from './colors.json';
 
 
@@ -12,38 +11,6 @@ const iconsDir: string = join(rootDir, 'icons');
 
 /** Default color used if a color array in `colors.json` is empty. */
 const defaultColor: string = '#2980b9';
-
-
-/**
- * Computes the width of a language code text in the SVG image
- * using the character widths from file `widths.ts`.
- * @param code Language code.
- * @returns Width in pixels.
- */
-function computeTextWidth(code: string): number {
-  let width = 0;
-  code.split('').forEach((character) => {
-    character = character.toUpperCase();
-    if (widths[character]) {
-      width += widths[character];
-    }
-  });
-  return width;
-}
-
-
-/**
- * Computes the left margin of a language code text in the SVG image
- * for centering the code in the SVG image.
- * @param code Language code.
- * @returns Left margin in pixels.
- */
-function computeLeftMargin(code: string): number {
-  const totalWidth = 128;
-  const width = computeTextWidth(code);
-  return Math.floor((totalWidth - width) / 2);
-}
-
 
 /**
  * Reads the content of a file.
@@ -109,7 +76,6 @@ async function generateIcon(code: string, templates: string[]): Promise<string> 
   // Replace language code text, margin and colors in the template file
   let data: string = templateData
     .replace('LANGUAGE_CODE', code.toUpperCase())
-    .replace(`x="20"`, `x="${computeLeftMargin(code)}"`)
     .replace('COLOR_1', languageColors.length ? languageColors[0] : defaultColor)
     .replace('COLOR_2', languageColors[1])
     .replace('COLOR_3', languageColors[2]);
