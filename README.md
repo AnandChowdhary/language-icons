@@ -36,17 +36,56 @@ With the CSS style `style="border-radius: 50%"` the icon can be converted to a c
 <img alt="English" src="https://unpkg.com/language-icons/icons/en.svg" style="border-radius: 50%">
 ```
 
-Icons are also available on NPM:
+## 💻 Install
 
-```bash
+```sh
 npm install language-icons
 ```
 
-They are in the `./icons` folder, you can use an SVG loader to import them:
+## 📦 NPM package usage
 
-```js
-import English from "./node_modules/language-icons/icons/en.svg"
+Each icon is published as an SVG file under `language-icons/icons/` and named after its two-character ISO 639-1 language code.
+
+### Package file path
+
+If your tool needs the installed SVG file directly, icons are available at `node_modules/language-icons/icons/<code>.svg`, for example `node_modules/language-icons/icons/en.svg`.
+
+### React
+
+Most React bundlers can import SVG files from the package as asset URLs, depending on their SVG loader configuration:
+
+```tsx
+import englishIcon from "language-icons/icons/en.svg";
+
+export function LanguageIcon() {
+  return <img src={englishIcon} alt="English" width={32} height={32} />;
+}
 ```
+
+### React with Material UI `SvgIcon`
+
+If your bundler is configured for SVG components with SVGR, you can wrap an icon with MUI's `SvgIcon`. Choose one import style based on your bundler:
+
+```tsx
+import SvgIcon, { SvgIconProps } from "@mui/material/SvgIcon";
+import { ReactComponent as EnglishIconSvg } from "language-icons/icons/en.svg";
+
+export function EnglishLanguageIcon(props: SvgIconProps) {
+  return <SvgIcon component={EnglishIconSvg} inheritViewBox {...props} />;
+}
+```
+
+For Vite projects using `vite-plugin-svgr`, import the SVG component with the `?react` suffix instead:
+
+```tsx
+import EnglishIconSvg from "language-icons/icons/en.svg?react";
+```
+
+## 📖 Reference
+
+- [ISO 639-1 Language Code List](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+- [Flag Icons (lipis/flag-icons)](https://github.com/lipis/flag-icons)
+
 
 ## ⭐ Why
 
