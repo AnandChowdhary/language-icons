@@ -110,7 +110,7 @@ See the list of icons: https://unpkg.com/language-icons/icons/
 
 ## ⚒️ Building
 
-Install Typescript dependencies and build icons using the `npm run build` command.
+Install Typescript dependencies, create the `./icons` folder and build icons using the `npm run build` command.
 
 ## 📝 License
 
