@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "tsc && node dist/index.js",
+    "prepack": "npm run build",
     "watch": "onchange 'colors.json' -- yarn build"
   },
   "devDependencies": {
