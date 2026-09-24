@@ -133,6 +133,7 @@ async function generateAllIcons(): Promise<void> {
 
   } catch (error) {
     console.error('An error occurred while generating language icons: ' + error);
+    process.exitCode = 1;
   }
 }
 
