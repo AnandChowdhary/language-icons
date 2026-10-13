@@ -1,0 +1,81 @@
+name: Release CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    name: Build, test, and release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Run tests
+        run: npm test
+
+      - name: Check published version
+        id: check_version
+        env:
+          PACKAGE_NAME: language-icons
+        run: |
+          LOCAL_VERSION=$(node -p "require('./package.json').version")
+          PUBLISHED_VERSION=$(npm view "$PACKAGE_NAME" version 2>/dev/null || echo "0.0.0")
+          echo "Local version: $LOCAL_VERSION"
+          echo "Published version: $PUBLISHED_VERSION"
+
+          if [ "$LOCAL_VERSION" = "$PUBLISHED_VERSION" ]; then
+            echo "⏭️  Version $LOCAL_VERSION is already published"
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "✅ Version $LOCAL_VERSION differs from published $PUBLISHED_VERSION"
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
+            echo "version=$LOCAL_VERSION" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Pack check
+        if: steps.check_version.outputs.should_publish == 'true'
+        run: npm pack --dry-run
+
+      - name: Publish to npm
+        if: steps.check_version.outputs.should_publish == 'true'
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          # Use npm Trusted Publishing (OIDC) when no NPM_TOKEN secret is set,
+          # otherwise fall back to the classic token flow.
+          if [ -z "$NPM_TOKEN" ]; then
+            npm publish --provenance --access public
+          else
+            npm publish --access public
+          fi
+
+      - name: Create GitHub release
+        if: steps.check_version.outputs.should_publish == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.check_version.outputs.version }}
+        run: |
+          gh release create "v$VERSION" \
+            --title "v$VERSION" \
+            --generate-notes \
+            --latest
