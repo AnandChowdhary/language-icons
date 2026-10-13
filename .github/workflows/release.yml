@@ -2,9 +2,6 @@ name: Release CI
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - master
 
 permissions:
   contents: write
